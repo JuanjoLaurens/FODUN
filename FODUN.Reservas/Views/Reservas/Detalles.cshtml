@@ -1,0 +1,85 @@
+﻿@model FODUN.Reservas.Models.Reserva
+
+@{
+    ViewData["Title"] = "Detalles de Reserva";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Detalles de la Reserva #@Model.ReservaId</h2>
+
+    <div class="card shadow p-4">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ApplicationUser.NombreCompleto)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ApplicationUser.NombreCompleto)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Alojamiento.Nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Alojamiento.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Alojamiento.Ubicacion.Nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Alojamiento.Ubicacion.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FechaInicio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FechaFin)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.NumeroPersonas)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.NumeroPersonas)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </dt>
+            <dd class="col-sm-9">
+                $@Model.ValorTotal.ToString("N0")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.EstadoReserva)
+            </dt>
+            <dd class="col-sm-9">
+                <span class="badge @(Model.EstadoReserva == "Confirmada" ? "bg-success" : (Model.EstadoReserva == "Pendiente" ? "bg-warning text-dark" : "bg-danger"))">@Html.DisplayFor(model => model.EstadoReserva)</span>
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Notas)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Notas)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FechaCreacion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaActualizacion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FechaActualizacion)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Editar" asp-route-id="@Model.ReservaId" class="btn btn-warning">Editar</a>
+        <a asp-action="MisReservas" class="btn btn-secondary">Volver a Mis Reservas</a>
+    </div>
+</div>

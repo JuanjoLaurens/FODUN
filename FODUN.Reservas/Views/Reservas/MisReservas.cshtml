@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FODUN.Reservas.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Mis Reservas";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Mis Reservas</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            No tienes reservas activas. ¡Explora nuestros alojamientos y haz tu primera reserva!
+            <a asp-action="Buscar" class="alert-link">Buscar Alojamientos</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Alojamiento</th>
+                        <th>Ubicación</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Personas</th>
+                        <th>Valor Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Alojamiento.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Alojamiento.Ubicacion.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaFin)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumeroPersonas)</td>
+                            <td>$@item.ValorTotal.ToString("N0")</td>
+                            <td><span class="badge @(item.EstadoReserva == "Confirmada" ? "bg-success" : (item.EstadoReserva == "Pendiente" ? "bg-warning text-dark" : "bg-danger"))">@Html.DisplayFor(modelItem => item.EstadoReserva)</span></td>
+                            <td>
+                                <a asp-action="Detalles" asp-route-id="@item.ReservaId" class="btn btn-info btn-sm">Detalles</a>
+                                @if (item.EstadoReserva == "Pendiente" || item.EstadoReserva == "Confirmada") 
+                                {
+                                    <a asp-action="Editar" asp-route-id="@item.ReservaId" class="btn btn-warning btn-sm">Editar</a>
+                                    <a asp-action="Eliminar" asp-route-id="@item.ReservaId" class="btn btn-danger btn-sm">Eliminar</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

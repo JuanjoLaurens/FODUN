@@ -1,0 +1,88 @@
+﻿@model FODUN.Reservas.ViewModels.BusquedaDisponibilidadViewModel
+
+@{
+    ViewData["Title"] = "Buscar Reservas";
+}
+
+<h1>Buscar Alojamientos Disponibles</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Buscar" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FechaLlegada" class="control-label"></label>
+                <input asp-for="FechaLlegada" type="date" class="form-control" />
+                <span asp-validation-for="FechaLlegada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaSalida" class="control-label"></label>
+                <input asp-for="FechaSalida" type="date" class="form-control" />
+                <span asp-validation-for="FechaSalida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroPersonas" class="control-label"></label>
+                <input asp-for="NumeroPersonas" class="form-control" />
+                <span asp-validation-for="NumeroPersonas" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+@* --- Sección para mostrar los resultados de la búsqueda --- *@
+@if (Model.ResultadosBusqueda != null && Model.ResultadosBusqueda.Any())
+{
+    <h2>Resultados de Búsqueda</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ResultadosBusqueda.First().Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.ResultadosBusqueda.First().TipoAlojamiento)</th>
+                <th class="d-none">Ubicación</th> 
+                <th>@Html.DisplayNameFor(model => model.ResultadosBusqueda.First().CapacidadMaximaPersonas)</th>
+                <th>@Html.DisplayNameFor(model => model.ResultadosBusqueda.First().TarifaDiaOrdinario)</th>
+                <th>@Html.DisplayNameFor(model => model.ResultadosBusqueda.First().TarifaDiaEspecial)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var alojamiento in Model.ResultadosBusqueda)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => alojamiento.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => alojamiento.TipoAlojamiento)</td>
+                    <td class="d-none">@Html.DisplayFor(modelItem => alojamiento.Ubicacion.Nombre)</td> 
+                    <td>@Html.DisplayFor(modelItem => alojamiento.CapacidadMaximaPersonas)</td>
+                    <td>@(alojamiento.TarifaDiaOrdinario?.ToString("C") ?? "$0.00")</td>
+                    <td>@(alojamiento.TarifaDiaEspecial?.ToString("C") ?? "$0.00")</td>
+                    <td>
+                        <a asp-action="Crear" asp-route-alojamientoId="@alojamiento.AlojamientoId"
+                           asp-route-fechaLlegada="@Model.FechaLlegada.ToString("yyyy-MM-dd")"
+                           asp-route-fechaSalida="@Model.FechaSalida.ToString("yyyy-MM-dd")"
+                           asp-route-numeroPersonas="@Model.NumeroPersonas"
+                           class="btn btn-success btn-sm">Reservar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model.SearchAttempted && Model.IsSearchValid && !Model.ResultadosBusqueda.Any())
+{
+    <div class="alert alert-info" role="alert">
+        No se encontraron alojamientos disponibles para las fechas y número de personas seleccionados.
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

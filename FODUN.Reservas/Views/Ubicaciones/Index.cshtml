@@ -1,0 +1,89 @@
+﻿@model IEnumerable<FODUN.Reservas.Models.Ubicacion>
+
+@{
+    ViewData["Title"] = "Ubicaciones";
+}
+
+<h1 class="mb-4">
+    <i class="fas fa-map-marker-alt"></i> Ubicaciones
+</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus-circle"></i> Crear Nueva Ubicación
+    </a>
+</p>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+    </div>
+    <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre o tipo de ubicación..." aria-label="Buscar" />
+</div>
+<br />
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover" id="ubicacionesTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoUbicacion)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoUbicacion)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.UbicacionId" class="btn btn-info btn-sm" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.UbicacionId" class="btn btn-secondary btn-sm" title="Detalles">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.UbicacionId" class="btn btn-danger btn-sm" title="Eliminar">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+        // Función para normalizar cadenas (quitar tildes)
+        function normalizeText(text) {
+            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        $(document).ready(function () {
+            $("#searchInput").on("keyup", function () {
+                var searchValue = normalizeText($(this).val().toLowerCase());
+                
+                $("#ubicacionesTable tbody tr").filter(function () {
+                    var rowText = normalizeText($(this).text().toLowerCase());
+                    $(this).toggle(rowText.indexOf(searchValue) > -1);
+                });
+            });
+        });
+    </script>
+}

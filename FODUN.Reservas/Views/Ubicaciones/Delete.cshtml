@@ -1,0 +1,35 @@
+﻿@model FODUN.Reservas.Models.Ubicacion
+
+@{
+    ViewData["Title"] = "Eliminar Ubicación";
+}
+
+<h1 class="mb-4 text-danger"><i class="fas fa-trash-alt"></i> Eliminar Ubicación</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esta ubicación?</h3>
+<p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Esta acción eliminará permanentemente la ubicación y afectará a los alojamientos asociados.</p>
+<div>
+    <h4>Ubicación</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TipoUbicacion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TipoUbicacion)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="UbicacionId" />
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver a la Lista</a>
+    </form>
+</div>

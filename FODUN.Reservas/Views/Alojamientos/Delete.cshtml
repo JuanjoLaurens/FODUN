@@ -1,0 +1,67 @@
+﻿@model FODUN.Reservas.Models.Alojamiento
+
+@{
+    ViewData["Title"] = "Eliminar Alojamiento";
+}
+
+<h1 class="mb-4 text-danger"><i class="fas fa-trash-alt"></i> Eliminar Alojamiento</h1>
+
+<h3>¿Estás seguro de que quieres eliminar este alojamiento?</h3>
+<p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Esta acción no se puede deshacer.</p>
+<div>
+    <h4>Alojamiento</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TipoAlojamiento)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TipoAlojamiento)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.CapacidadMaximaPersonas)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.CapacidadMaximaPersonas)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Ubicacion.Nombre)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.Activo)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="AlojamientoId" />
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver a la Lista</a>
+    </form>
+</div>

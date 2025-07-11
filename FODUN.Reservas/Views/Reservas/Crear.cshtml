@@ -1,0 +1,180 @@
+﻿@model FODUN.Reservas.ViewModels.CrearReservaViewModel
+
+@{
+    ViewData["Title"] = "Crear Nueva Reserva";
+}
+
+<div class="container mt-5">
+    <h2>Crear Nueva Reserva</h2>
+    <hr />
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <form asp-action="Crear" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                Detalles del Alojamiento
+            </div>
+            <div class="card-body">
+                <div class="form-group row mb-3">
+                    <label asp-for="AlojamientoNombre" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="AlojamientoNombre" class="form-control-plaintext" readonly />
+                        <input type="hidden" asp-for="AlojamientoId" /> @* Campo oculto para enviar el ID del alojamiento *@
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label asp-for="UbicacionNombre" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="UbicacionNombre" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label asp-for="FechaInicio" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="FechaInicio" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label asp-for="FechaFin" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="FechaFin" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Información de la Reserva
+            </div>
+            <div class="card-body">
+                <div class="form-group mb-3">
+                    <label asp-for="NumeroPersonas" class="control-label"></label>
+                    <input asp-for="NumeroPersonas" class="form-control" />
+                    <span asp-validation-for="NumeroPersonas" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="NumeroUnidadesReservadas" class="control-label"></label>
+                    <input asp-for="NumeroUnidadesReservadas" class="form-control" />
+                    <span asp-validation-for="NumeroUnidadesReservadas" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check mb-3">
+                    <input class="form-check-input" asp-for="IncluyeLavanderia" />
+                    <label class="form-check-label" asp-for="IncluyeLavanderia"></label>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="NumeroAcompanantesVisitaDia" class="control-label"></label>
+                    <input asp-for="NumeroAcompanantesVisitaDia" class="form-control" />
+                    <span asp-validation-for="NumeroAcompanantesVisitaDia" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Notas" class="control-label"></label>
+                    <textarea asp-for="Notas" class="form-control"></textarea>
+                    <span asp-validation-for="Notas" class="text-danger"></span>
+                </div>
+
+                @* Campo visible para el valor total estimado *@
+                <div class="mb-4">
+                    <label asp-for="ValorTotalEstimado" class="form-label fw-semibold text-primary">
+                        @Html.DisplayNameFor(model => model.ValorTotalEstimado)
+                    </label>
+                    <input asp-for="ValorTotalEstimado"
+                           class="form-control bg-light border-0 rounded shadow-sm fw-bold text-success"
+                           readonly
+                           value="@Model.ValorTotalEstimado.ToString("N0")" />
+                    <span asp-validation-for="ValorTotalEstimado" class="text-danger small"></span>
+                </div>
+
+                @* Campo OCULTO para ValorTotal (el que se enviará y validará en el servidor) *@
+                <input type="hidden" asp-for="ValorTotal" />
+                <span asp-validation-for="ValorTotal" class="text-danger small"></span>
+
+
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
+            <a asp-action="Buscar" class="btn btn-secondary">Cancelar y Volver a Buscar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Función para calcular la tarifa y actualizar los campos
+            function calcularTarifa() {
+                var alojamientoId = $('#AlojamientoId').val();
+                var fechaInicio = $('#FechaInicio').val();
+                var fechaFin = $('#FechaFin').val();
+                var numeroPersonas = $('#NumeroPersonas').val();
+                var numeroUnidadesReservadas = $('#NumeroUnidadesReservadas').val();
+                var incluyeLavanderia = $('#IncluyeLavanderia').is(':checked');
+                var numeroAcompanantesVisitaDia = $('#NumeroAcompanantesVisitaDia').val();
+
+                // Validación básica para evitar llamadas innecesarias o con datos incompletos
+                if (!alojamientoId || !fechaInicio || !fechaFin || !numeroPersonas) {
+                    $('#ValorTotalEstimado').val("0"); 
+                    $('#ValorTotal').val("0"); 
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("CalcularTarifa", "Reservas")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        AlojamientoId: parseInt(alojamientoId),
+                        FechaInicio: fechaInicio,
+                        FechaFin: fechaFin,
+                        NumeroPersonas: parseInt(numeroPersonas),
+                        NumeroUnidadesReservadas: parseInt(numeroUnidadesReservadas),
+                        IncluyeLavanderia: incluyeLavanderia,
+                        NumeroAcompanantesVisitaDia: parseInt(numeroAcompanantesVisitaDia)
+                    }),
+                    success: function (response) {
+                        if (response.success) {
+                            // Formatear el valor total para mostrarlo sin decimales (como int)
+                            
+                            var valorEstimadoRedondeado = Math.round(parseFloat(response.valorTotal));
+                            $('#ValorTotalEstimado').val(valorEstimadoRedondeado);
+                            // También actualiza el campo oculto con el valor redondeado para el envío
+                            $('#ValorTotal').val(valorEstimadoRedondeado);
+                        } else {
+                            alert('Error al calcular tarifa: ' + response.message);
+                            $('#ValorTotalEstimado').val("Error");
+                            $('#ValorTotal').val("0"); 
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error AJAX:", error);
+                        alert("Ocurrió un error al intentar calcular la tarifa. Por favor, intente de nuevo.");
+                        $('#ValorTotalEstimado').val("Error");
+                        $('#ValorTotal').val("0"); 
+                    }
+                });
+            }
+
+            // Atar la función calcularTarifa a los eventos change de los campos relevantes
+            $('#NumeroPersonas, #NumeroUnidadesReservadas, #IncluyeLavanderia, #NumeroAcompanantesVisitaDia').on('change', function () {
+                calcularTarifa();
+            });
+
+            // Llama a calcularTarifa una vez al cargar la página si ya hay valores
+            calcularTarifa();
+        });
+    </script>
+}

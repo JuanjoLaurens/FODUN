@@ -1,0 +1,195 @@
+﻿@model FODUN.Reservas.Models.Alojamiento
+
+@{
+    ViewData["Title"] = "Detalles del Alojamiento";
+}
+
+<h1 class="mb-4"><i class="fas fa-info-circle"></i> Detalles del Alojamiento</h1>
+
+<div>
+    <h4>Alojamiento</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TipoAlojamiento)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TipoAlojamiento)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.CapacidadMaximaPersonas)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.CapacidadMaximaPersonas)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.CamasDobles)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.CamasDobles)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.CamasSencillas)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.CamasSencillas)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Camarotes)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Camarotes)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TieneBanoPrivado)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.TieneBanoPrivado)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TieneNevera)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.TieneNevera)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TieneTelevisor)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.TieneTelevisor)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TieneCocinetaEquipada)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.TieneCocinetaEquipada)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TieneSalaEstar)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.TieneSalaEstar)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TieneTerraza)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.TieneTerraza)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TarifaDiaOrdinario)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TarifaDiaOrdinario)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TarifaDiaEspecial)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TarifaDiaEspecial)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.Activo)
+            {
+                <i class="fas fa-check text-success"></i>
+                <span>Sí</span>
+ }
+else
+{
+                <i class="fas fa-times text-danger"></i>
+                <span>No</span>
+ }
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.FechaActualizacion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.FechaActualizacion)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Ubicacion.Nombre)
+        </dd>
+    </dl>
+</div>
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.AlojamientoId" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>
+    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver a la Lista</a>
+</div>

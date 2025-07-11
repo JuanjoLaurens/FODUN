@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Bienvenido a FODUN Reservas";
+}
+
+<style>
+    .hero-section {
+        background-size: cover;
+        color: black;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        padding: 80px 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+
+    .hero-section h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto 30px auto;
+    }
+
+    .info-card {
+        background-color: #f8f9fa; 
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        min-height: 250px; 
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .info-card h3 {
+        color: #007bff; 
+        margin-bottom: 15px;
+    }
+
+    .info-card .icon {
+        font-size: 3rem;
+        color: #28a745; 
+        margin-bottom: 15px;
+    }
+
+    .call-to-action-section {
+        background-color: #007bff; 
+        color: white;
+        padding: 40px 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .call-to-action-section h2 {
+        margin-bottom: 20px;
+    }
+
+    .call-to-action-section .btn-light {
+        font-size: 1.2rem;
+        padding: 10px 30px;
+        border-radius: 50px;
+    }
+
+    /*Ajustes para iconos de Font Awesome */
+    .fa-icon {
+        color: #28a745; 
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="text-center hero-section">
+        <h1>¡Bienvenido a FODUN Reservas!</h1>
+        <p class="lead">
+            Tu portal exclusivo para encontrar y reservar los mejores alojamientos
+            en nuestras sedes recreativas y apartamentos, diseñados para el bienestar
+            de nuestros asociados y sus familias.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="info-card text-center">
+                <div class="icon"><i class="fas fa-umbrella-beach fa-icon"></i></div>
+                <h3>Explora Destinos</h3>
+                <p>Descubre nuestra variedad de sedes recreativas y apartamentos en ubicaciones privilegiadas.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-card text-center">
+                <div class="icon"><i class="fas fa-calendar-check fa-icon"></i></div>
+                <h3>Reservas Sencillas</h3>
+                <p>Verifica disponibilidad en tiempo real y reserva tu lugar ideal con unos pocos clics.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-card text-center">
+                <div class="icon"><i class="fas fa-calculator fa-icon"></i></div>
+                <h3>Tarifas Claras</h3>
+                <p>Calcula el valor total de tu estadía de forma transparente, incluyendo todos los detalles.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="call-to-action-section">
+        <h2>¿Listo para tu próxima aventura?</h2>
+        <p>Regístrate o inicia sesión para acceder a todas nuestras funcionalidades y empezar a planificar.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-controller="Account" asp-action="Register" class="btn btn-light">
+                <i class="fas fa-user-plus"></i> Registrarme
+            </a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-light">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+}

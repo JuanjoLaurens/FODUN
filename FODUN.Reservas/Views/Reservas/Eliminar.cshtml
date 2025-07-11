@@ -1,0 +1,69 @@
+﻿@model FODUN.Reservas.Models.Reserva
+
+@{
+    ViewData["Title"] = "Eliminar Reserva";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-danger">Confirmar Eliminación de Reserva</h2>
+    <h4 class="mb-3">¿Está seguro de que desea eliminar esta reserva?</h4>
+
+    <div class="card shadow p-4 mb-4">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ReservaId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ReservaId)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Alojamiento.Nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Alojamiento.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Alojamiento.Ubicacion.Nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Alojamiento.Ubicacion.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FechaInicio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FechaFin)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.NumeroPersonas)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.NumeroPersonas)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </dt>
+            <dd class="col-sm-9">
+                $@Model.ValorTotal.ToString("N0")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.EstadoReserva)
+            </dt>
+            <dd class="col-sm-9">
+                <span class="badge @(Model.EstadoReserva == "Confirmada" ? "bg-success" : (Model.EstadoReserva == "Pendiente" ? "bg-warning text-dark" : "bg-danger"))">@Html.DisplayFor(model => model.EstadoReserva)</span>
+            </dd>
+        </dl>
+    </div>
+
+    <form asp-action="Eliminar" method="post">
+        <input type="hidden" asp-for="ReservaId" />
+        <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+        <a asp-action="MisReservas" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
