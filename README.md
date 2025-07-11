@@ -67,7 +67,7 @@ Para probar la aplicación:
 
 ## Video de Demostración
 
-**[Video Funcional Administracion Alojamientos](https://youtu.be/mlGc_QFi1bk?si=MJxFu_9kKvSwIdTj)**
+**[Video Funcional Administracion Alojamientos](https://youtu.be/D3HSmRvtkPs?si=27aRx8zkyuqwWjEw)**
 
 ---
 **Desarrollado por:** Juan Jose Laurens Gomez
