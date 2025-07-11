@@ -39,13 +39,15 @@
                 <div class="form-group row mb-3">
                     <label asp-for="FechaInicio" class="col-sm-3 col-form-label"></label>
                     <div class="col-sm-9">
-                        <input asp-for="FechaInicio" class="form-control-plaintext" readonly />
+                        <input asp-for="FechaInicio" class="form-control" type="date" />
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row mb-3">
                     <label asp-for="FechaFin" class="col-sm-3 col-form-label"></label>
                     <div class="col-sm-9">
-                        <input asp-for="FechaFin" class="form-control-plaintext" readonly />
+                        <input asp-for="FechaFin" class="form-control" type="date" />
+                        <span asp-validation-for="FechaFin" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -127,8 +129,8 @@
 
                 // Validación básica para evitar llamadas innecesarias o con datos incompletos
                 if (!alojamientoId || !fechaInicio || !fechaFin || !numeroPersonas) {
-                    $('#ValorTotalEstimado').val("0"); 
-                    $('#ValorTotal').val("0"); 
+                    $('#ValorTotalEstimado').val("0");
+                    $('#ValorTotal').val("0");
                     return;
                 }
 
@@ -148,7 +150,7 @@
                     success: function (response) {
                         if (response.success) {
                             // Formatear el valor total para mostrarlo sin decimales (como int)
-                            
+
                             var valorEstimadoRedondeado = Math.round(parseFloat(response.valorTotal));
                             $('#ValorTotalEstimado').val(valorEstimadoRedondeado);
                             // También actualiza el campo oculto con el valor redondeado para el envío
@@ -156,20 +158,20 @@
                         } else {
                             alert('Error al calcular tarifa: ' + response.message);
                             $('#ValorTotalEstimado').val("Error");
-                            $('#ValorTotal').val("0"); 
+                            $('#ValorTotal').val("0");
                         }
                     },
                     error: function (xhr, status, error) {
                         console.error("Error AJAX:", error);
                         alert("Ocurrió un error al intentar calcular la tarifa. Por favor, intente de nuevo.");
                         $('#ValorTotalEstimado').val("Error");
-                        $('#ValorTotal').val("0"); 
+                        $('#ValorTotal').val("0");
                     }
                 });
             }
 
             // Atar la función calcularTarifa a los eventos change de los campos relevantes
-            $('#NumeroPersonas, #NumeroUnidadesReservadas, #IncluyeLavanderia, #NumeroAcompanantesVisitaDia').on('change', function () {
+            $('#NumeroPersonas, #NumeroUnidadesReservadas, #IncluyeLavanderia, #NumeroAcompanantesVisitaDia, #FechaInicio, #FechaFin').on('change', function () {
                 calcularTarifa();
             });
 

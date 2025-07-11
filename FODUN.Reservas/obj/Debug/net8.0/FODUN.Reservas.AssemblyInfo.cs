@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FODUN.Reservas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16172f0aadbdec6a831af6e762b03ccca3b558c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("FODUN.Reservas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FODUN.Reservas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

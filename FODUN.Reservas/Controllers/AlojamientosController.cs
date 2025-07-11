@@ -11,7 +11,7 @@ using FODUN.Reservas.Services;
 
 namespace FODUN.Reservas.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize]
     public class AlojamientosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,6 +24,7 @@ namespace FODUN.Reservas.Controllers
         }
 
         // GET: Alojamientos
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             try
@@ -40,6 +41,7 @@ namespace FODUN.Reservas.Controllers
         }
 
         // GET: Alojamientos/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             try
@@ -70,6 +72,7 @@ namespace FODUN.Reservas.Controllers
         }
 
         // GET: Alojamientos/Create
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Create()
         {
             try
@@ -107,6 +110,7 @@ namespace FODUN.Reservas.Controllers
 
         // POST: Alojamientos/Create
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AlojamientoId,UbicacionId,Nombre,Descripcion,TipoAlojamiento,CapacidadMaximaPersonas,CamasDobles,CamasSencillas,Camarotes,TieneBanoPrivado,TieneNevera,TieneTelevisor,TieneCocinetaEquipada,TieneSalaEstar,TieneTerraza,TarifaDiaOrdinario,TarifaDiaEspecial,Activo")] Alojamiento alojamiento)
         {
@@ -142,6 +146,7 @@ namespace FODUN.Reservas.Controllers
         }
 
         // GET: Alojamientos/Edit/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Edit(int? id)
         {
             try
@@ -175,6 +180,7 @@ namespace FODUN.Reservas.Controllers
         // POST: Alojamientos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
 
         public async Task<IActionResult> Edit(int id, [Bind("AlojamientoId,UbicacionId,Nombre,Descripcion,TipoAlojamiento,CapacidadMaximaPersonas,CamasDobles,CamasSencillas,Camarotes,TieneBanoPrivado,TieneNevera,TieneTelevisor,TieneCocinetaEquipada,TieneSalaEstar,TieneTerraza,TarifaDiaOrdinario,TarifaDiaEspecial,Activo")] Alojamiento alojamiento)
         {
@@ -235,6 +241,7 @@ namespace FODUN.Reservas.Controllers
         }
 
         // GET: Alojamientos/Delete/5
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Delete(int? id)
         {
             try
@@ -263,6 +270,7 @@ namespace FODUN.Reservas.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try

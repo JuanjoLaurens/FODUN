@@ -8574,11 +8574,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cjjua\\OneDrive\\Documentos\\Proyectos\\FODUN.Reservas\\FODUN.Reservas.csproj",
+      "projectUniqueName": "C:\\Users\\cjjua\\OneDrive\\Documentos\\Proyectos\\GIT\\FODUN\\FODUN.Reservas\\FODUN.Reservas.csproj",
       "projectName": "FODUN.Reservas",
-      "projectPath": "C:\\Users\\cjjua\\OneDrive\\Documentos\\Proyectos\\FODUN.Reservas\\FODUN.Reservas.csproj",
+      "projectPath": "C:\\Users\\cjjua\\OneDrive\\Documentos\\Proyectos\\GIT\\FODUN\\FODUN.Reservas\\FODUN.Reservas.csproj",
       "packagesPath": "C:\\Users\\cjjua\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cjjua\\OneDrive\\Documentos\\Proyectos\\FODUN.Reservas\\obj\\",
+      "outputPath": "C:\\Users\\cjjua\\OneDrive\\Documentos\\Proyectos\\GIT\\FODUN\\FODUN.Reservas\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

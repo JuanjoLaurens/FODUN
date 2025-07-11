@@ -38,13 +38,19 @@
                         @* Enlaces para usuarios autenticados (cualquier rol) *@
                         @if (SignInManager.IsSignedIn(User))
                         {
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservas" asp-action="Buscar">Buscar Alojamiento</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Alojamientos" asp-action="Index">Nuestros Alojamientos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservas" asp-action="Buscar">Buscar Disponibilidad</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Reservas" asp-action="MisReservas">Mis Reservas</a>
                             </li>
+                            
                         }
 
                         @* Enlaces específicos para el rol de Administrador *@
